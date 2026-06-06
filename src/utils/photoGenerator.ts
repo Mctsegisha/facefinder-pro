@@ -124,11 +124,11 @@ export function generateEventPhotos(count: number): SimulatedPhoto[] {
     // Unsplash allows passing 'sig' parameter to force uniqueness or randomized versions
     const url = `https://images.unsplash.com/${baseId}?auto=format&fit=crop&q=${qualityParam}&w=${widthParam}&sig=${i}`;
 
-    // Compute a pseudo-random deterministic vector of 256 dimensions
+    // Compute a pseudo-random deterministic vector of 128 dimensions
     // We base it on seed so it is stable and fast to compute
-    const embedding: number[] = new Array(256).fill(0);
+    const embedding: number[] = new Array(128).fill(0);
     let sumSqr = 0;
-    for (let d = 0; d < 256; d++) {
+    for (let d = 0; d < 128; d++) {
       // Use trigonometric mixes to compute a unique deterministic coordinates spread
       const val = Math.sin(i * 3.7 + d) * Math.cos(d * 11.3 + i * 0.17);
       embedding[d] = val;
@@ -138,7 +138,7 @@ export function generateEventPhotos(count: number): SimulatedPhoto[] {
     // Normalize to unit length (L2 norm) so cosine similarity search matches standard expectations perfectly
     const mag = Math.sqrt(sumSqr);
     if (mag > 0) {
-      for (let d = 0; d < 256; d++) {
+      for (let d = 0; d < 128; d++) {
         embedding[d] /= mag;
       }
     }
