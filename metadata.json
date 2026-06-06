@@ -1,0 +1,7 @@
+{
+  "name": "FaceFinder: Event Photo Discovery",
+  "description": "A facial recognition-driven platform for event attendees to find their photos using a selfie.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
